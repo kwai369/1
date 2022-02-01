@@ -1,0 +1,51 @@
+/* The problem statement can be found at the below link. */
+/* https://codeforces.com/contest/1619/problem/B */
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+ 
+int testcase(){
+	ll n;
+	cin >> n;
+	ll ans=0;
+	vector<ll> check;
+	for(ll i=2;i<n;i++){
+		if((i*i) <= n){
+			ans++;
+			check.push_back(i*i);
+		}
+		else{
+			break;
+		}
+	}
+	for(ll i=2;i<n;i++){
+		if((i*i*i)<=n){
+			if(binary_search(check.begin(),check.end(),i*i*i)){
+				continue;
+			}
+			else{
+				ans++;
+			}
+		}
+		else{
+			break;
+		}
+	}
+	return ans+1;
+}
+ 
+int main(){
+	int t;
+	cin >> t;
+	ll a[t];
+	int i=0;
+	while(t--){
+		a[i] = testcase();
+		i++;
+	}
+	for(int j=0;j<i;j++){
+		cout << a[j] << "\n";
+	}
+	return 0;
+}
+

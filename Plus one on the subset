@@ -1,0 +1,28 @@
+/* The problem statement can be found at the below link */
+/* https://codeforces.com/contest/1624/problem/A */
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int t;
+	cin >> t;
+	int ans[t];
+	int i=0;
+	while(t--){
+		int n;
+		cin >> n;
+		long long a[n];
+		for(long long& x:a){
+			cin >> x;
+		} 
+		sort(a,a+n);
+		ans[i] = a[n-1] - a[0];
+		i++;
+	}
+	for(int& x:ans){
+		cout << x << "\n";
+	}
+	return 0;
+}

@@ -1,0 +1,71 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=735 */
+/* Among the following two solutions the first solution is the solutoin not produced by us and
+the second solution is the solution produced by us.Here we are goingto compare them.*/
+/* Solution 1:- */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	freopen("lostcow.in","r",stdin);
+	freopen("lostcow.out","w",stdout);
+	int x,y;
+	cin >> x >> y;
+	ll ans = 0,by=1,dir=1;
+	while(true){
+		if((dir==1 && y<=x+by && x<y) || (dir==-1 && y>=x-by && y<x)){
+			ans += abs(y-x);
+			cout << ans;
+			break;
+		}
+		else{
+			by *= 2;
+			ans += by;
+			dir *= -1;
+		}
+	}
+	return 0;
+}
+/* Solution 2:- */
+#include<bits/stdc++.h>
+using namespace std;
+
+int testcases(){
+	int x,y;
+	cin >> x >> y;
+	int temp = x;
+	int ans1 = 0; 
+	while(true){
+		for(;x<temp+1;x++){
+			ans1++;
+			if(x==y){
+				return ans1;
+			}
+		}
+		for(;x>(temp-2);x--){
+			ans1++;
+			if(x==y){
+				return ans1;
+			}
+		}
+		for(;x<temp+4;x++){
+			ans1++;
+			if(x==y){
+				return ans1;
+			}
+		}
+		temp = x;
+	}		
+}
+
+int main(){
+	cout << testcases();
+	return 0;
+}
+/* Testcases comparision. */
+/* -> The first solution satisfies all the testcases. */
+/* -> Where as the second solution satisfies only two testcases, it exeeds the time limit in four testcases and produces wrong answer in four testaces. */
+/* The mistakes done in second solution. */
+/* ->  In second solution the question interpretation was totally wrong. */
+/* -> This is the biggest mistake to not understand the question properly.*/

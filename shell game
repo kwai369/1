@@ -1,0 +1,38 @@
+/* The problem statement can be found at the below link */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=891 */
+#include<bits/stdc++.h>
+using namespace std;
+
+void swap(int d[],int i1,int i2){
+	int temp = d[i1];
+	d[i1] = d[i2];
+	d[i2] = temp;
+}
+
+int main(){
+	freopen("shell.in","r",stdin);
+	freopen("shell.out","w",stdout);
+	int c[] = {1,2,3};
+	int start1 = 0;
+	int start2 = 0;
+	int start3 = 0;
+	int n;
+	cin >> n;
+	while(n--){
+		int a,b,g;
+		cin >> a >> b >> g;
+		swap(c,a-1,b-1);
+		if(c[g-1]==1){
+			start1++;
+		}
+		else if(c[g-1]==2){
+			start2++;
+		}
+		else{
+			start3++;
+		}
+	}	
+	cout << max({start1,start2,start3});
+	return 0;
+}
+

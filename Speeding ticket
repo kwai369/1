@@ -1,0 +1,52 @@
+/* The problem statement can be fouond at the link below. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=568 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("speeding.in","r",stdin);
+	freopen("speeding.out","w",stdout);
+	int n,m;
+	cin >> n >> m;
+	vector<int> nl(n),ns(n);
+	vector<int> ml(m),ms(m);
+	for(int i=0;i<n;i++){
+		cin >> nl[i] >> ns[i];
+	}
+	for(int i=0;i<m;i++){
+		cin >> ml[i] >> ms[i];
+	}
+	int ans=0;
+	for(int i=0,j=0;i<n && j<m;){
+		if(nl[i] == ml[j]){
+			if(ms[j]>ns[i]){
+				if(ans < (ms[j]-ns[i])){
+					ans = ms[j] -ns[i];
+				}
+			}
+			i++;
+			j++;
+		}
+		else if(nl[i] > ml[j]){
+			nl[i] = nl[i] - ml[j];
+			if(ms[j]>ns[i]){
+				if(ans < (ms[j]-ns[i])){
+					ans = ms[j] -ns[i];
+				}
+			}
+			j++;
+		}
+		else{
+			ml[j] = ml[j] - nl[i];
+			if(ms[j]>ns[i]){
+				if(ans < (ms[j]-ns[i])){
+					ans = ms[j] -ns[i];
+				}
+			}
+			i++;
+		}
+	}
+	cout << ans;
+	return 0;
+}
+

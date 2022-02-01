@@ -1,0 +1,41 @@
+/* The problem statement can be found at the below link. */
+/* https://codeforces.com/contest/1624/problem/B */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void solvetest(){
+	ll a,b,c;
+	cin >> a >> b >> c;
+	int n_a = (2*b) - c;	
+	if(n_a>=a && n_a%a == 0 && n_a!=0){
+		cout << "YES\n"; 
+		return; 
+	}
+	int n_b = (a+c)/2;
+	if(n_b >= b && (a+c)%2==0 && n_b%b==0 && n_b!=0){
+		cout << "YES\n";
+		return; 
+	}
+	int n_c = (2*b) - a;
+	if(n_c>=c && n_c%c==0 && n_c!=0){
+		cout << "YES\n";
+		return;
+	}
+	cout << "NO\n";
+	return;
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0),cout.tie(0);
+	int t;
+	cin >> t; 
+	while(t--){	
+		solvetest();
+	}
+	return 0;
+}
+
+
+ 

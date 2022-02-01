@@ -1,0 +1,47 @@
+/* The problem statement can be found at the below link. 
+http://www.usaco.org/index.php?page=viewproblem2&cpid=856 
+Among the following two solutions the frist is the solution not produced by us
+and the second solution is the solution produced by us.  
+Solution 1:- */
+#include <iostream>
+#include <fstream>
+using namespace std;
+ 
+int N;
+int S[101], T[101], B[101];
+int start[1001], finish[1001];
+ 
+int solve(void)
+{
+  int buckets_needed = 0, b = 0;
+  for (int t=1; t<=1000; t++) {
+    if (start[t]) b += B[start[t]];
+    buckets_needed = max(buckets_needed, b);
+    if (finish[t]) b -= B[finish[t]];
+  }
+  return buckets_needed;
+}
+ 
+int main(void)
+{
+  freopen("blist.in","r",stdin);
+  freopen("blist.out","w",stdout);
+  cin >> N;
+  for (int i=1; i<=N; i++) {
+    cin >> S[i] >> T[i] >> B[i];
+    start[S[i]] = i;
+    finish[T[i]] = i;
+  }
+  cout << solve() << "\n";
+  return 0;
+}
+
+/* Solution 2:- 
+ We are not be able to recall the second solution. 
+
+ Testcases results. 
+ -> The first solution satisfies all the testcases.
+ -> Where as the second solution satisfies only one testcases and produces wrong answer on all the other testcases. 
+ Mistake in second solution. 
+ -> The second solution was not produced much wih the co-relation of logical connections present in the problem statement it was produced more based on the logical connections present in the testcases.
+ -> The first solution was produced much with the interpretation of logical connections present in the problem statement. */  

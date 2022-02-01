@@ -1,0 +1,38 @@
+/* The problem statement can be found found at the below link */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=663 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	ifstream fin("square.in");
+	ofstream fout("square.out");
+	int one[4],second[4];
+	for(int i=0;i<4;i++){
+		fin >> one[i];
+	}
+	for(int i=0;i<4;i++){
+		fin >> second[i];
+	}
+	int ans[4];
+	ans[0] = min(one[0],second[0]);
+	ans[1] = min(one[1],second[1]);
+	ans[2] = max(one[2],second[2]);
+	ans[3] = max(one[3],second[3]);
+	if(abs(ans[0]-ans[2]) != abs(ans[1]-ans[3])){
+		if(abs(ans[0]-ans[2]) > abs(ans[1]-ans[3])){
+			int add = abs(ans[0]-ans[2]) - abs(ans[1]-ans[3]);
+			ans[3] += add;
+			fout <<	abs(ans[0]-ans[2]) * abs(ans[1]-ans[3]);			
+		}
+		else{
+			int add = abs(ans[1]-ans[3]) - abs(ans[0]-ans[2]);
+			ans[2] += add;
+			fout <<	abs(ans[0]-ans[2]) * abs(ans[1]-ans[3]);
+		}
+	}
+	else{
+		fout << abs(ans[0]-ans[2]) * abs(ans[1]-ans[3]);
+	} 
+	return 0;
+}
+
