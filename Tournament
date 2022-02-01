@@ -1,0 +1,22 @@
+/* The problem statement can be found at the below link */
+/* https://www.codechef.com/ZCOPRAC/problems/ZCO13001 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int n,j=0,m=0;
+    scanf("%d",&n);
+    int x[n];
+    for(int& a:x){
+        scanf("%d",&a);
+    }
+    for(int i=0;i<n;i++){
+        for(j=+i;j<n;j++){
+		m += abs(x[i] - x[j]);
+        }
+    }   
+    printf("%d",m);
+	return 0;
+}

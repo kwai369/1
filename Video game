@@ -1,0 +1,52 @@
+/* The problem statement can be found at the below link. */ 
+/* https://www.codechef.com/ZCOPRAC/problems/ZCO14001 */ 
+#include<bits/stdc++.h>
+#define l long long
+using namespace std;
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int n;
+	l h;
+	scanf("%d %lld",&n,&h);
+	l a[n];
+	for(l& e : a){
+		scanf("%lld",&e);
+	}
+	int x,move=0,pick=0;
+	while(true){
+		scanf("%d",&x);
+		if(x==0){
+			break;
+		}
+		switch(x){
+			case 1:
+				if(move>0){
+					move--;
+				}
+				break;
+			case 2:
+				if(move<n-1){
+					move++;
+				}
+				break;
+			case 3:
+				if(pick==0 && a[move]>0){
+					pick++;
+					a[move]--;
+				}
+				break;
+			case 4:
+				if(pick==1 && a[move]<h){
+					pick--;
+					a[move]++;
+				}
+				break;
+		}
+	}
+	for(l& e : a){
+		printf("%lld",e);
+	}
+	return 0;
+}

@@ -1,0 +1,25 @@
+/* The problem statement can be found at the below link.*/
+/* https://www.codechef.com/ZCOPRAC/problems/ZCO14003 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(void){
+    int n;
+    cin >> n;
+    long long x[n],j,k=0;
+    for(int i = 0; i < n; i++){
+        cin >> x[i];
+    }
+    sort(x,x+n);
+    for(int i=0;i<n;i++){
+        j = x[i]*(n-i);
+        if(j>k){
+            k = j;
+        }
+        else{
+            continue;
+        }
+    }
+    cout << k;
+    return 0;
+}
