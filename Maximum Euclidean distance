@@ -1,0 +1,28 @@
+/* The problem statement can be found at the below link. */
+/* https://codeforces.com/gym/102951/problem/A */
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	int x[n],y[n];
+	for(int i=0;i<n;i++){
+		cin >> x[i];
+	}
+	for(int i=0;i<n;i++){
+		cin >> y[i];
+	}
+	int high = 0; 
+	for(int i=0;i<n;i++){
+		for(int j=i+1;j<n;j++){
+			int dx = x[i] - x[j];
+			int dy = y[i] - y[j];
+			high = max(high,(dx*dx)+(dy*dy));
+		}
+	}
+	cout << high;
+	return 0;
+}
+

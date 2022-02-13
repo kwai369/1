@@ -1,0 +1,40 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=784 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int T[1001];
+
+int main(){
+	freopen("lifeguards.in","r",stdin);
+	freopen("lifeguards.out","w",stdout);
+	int n;
+	cin >> n;
+	int start[n],end[n];
+	for(int i=0;i<n;i++){
+		cin >> start[i] >> end[i];
+	}
+	int curr=0,max=0;
+	for(int i=0;i<n;i++){
+		curr=0;
+		for(int j=start[i];j<end[i];j++){
+			T[j] = 0;
+		}
+		for(int j=0;j<n;j++){
+			if(i!=j){
+				for(int e=start[j];e<end[j];e++){
+					T[e] = 1;
+				}
+			}
+		}
+		for(int j=*min_element(start,start+n);j<*max_element(end,end+n);j++){
+			curr += T[j];
+		}
+		if(curr>max){
+			max = curr;
+		}
+	}
+	cout << max;
+	return 0;
+} 
+

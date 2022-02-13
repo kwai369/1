@@ -1,0 +1,41 @@
+/* The problem statement can be found at the below link.
+https://cses.fi/problemset/result/3490752/ */
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+ 
+int main(){
+	int n;
+	cin >>n;
+	ll a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	sort(a,a+n);
+	ll ex = a[0],ans=1;
+	for(int i=1;i<n;i++){
+		if(ex!=a[i]){
+			ex = a[i];
+			ans++;
+		}
+	}
+	cout << ans;
+	return 0;
+}
+/* There is another way to solve this problem which requires the knowledge of set data structure. */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	unordered_set<int> s;
+	int n;
+	cin >> n;
+	while(n){
+		int a;
+		cin >> a;
+		s.insert(a);
+		n--;
+	}
+	cout << s.size();
+	return 0;
+}

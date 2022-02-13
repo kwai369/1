@@ -1,0 +1,51 @@
+/* The problem statement can be found at the below link. 
+https://codeforces.com/contest/1216/problem/C */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+struct Rect {
+	ll x1, y1, x2, y2;
+};
+ 
+ll area(Rect r)
+{
+  return (r.x2 - r.x1) * (r.y2 - r.y1);
+} 
+
+Rect intersect(Rect p,Rect q){
+	Rect piq;
+	piq.x1 = max(p.x1,q.x1);
+	piq.y1 = max(p.y1,q.y1);
+	piq.x2 = min(p.x2,q.x2);
+	piq.y2 = min(p.y2,q.y2);
+	if(piq.x2<=piq.x1 || piq.y2<=piq.y1){
+		piq.x1 = 0;
+		piq.x2 = 0;
+		piq.y1 = 0;
+		piq.y2 = 0; 
+	}
+	return piq;
+}
+
+int main(){
+	Rect white,black1,black2;
+	cin >> white.x1 >> white.y1 >> white.x2 >> white.y2;
+	cin >> black1.x1 >> black1.y1 >> black1.x2 >> black1.y2;
+	cin >> black2.x1 >> black2.y1 >> black2.x2 >> black2.y2;
+	Rect wb1,wb2,inter;
+	wb1 = intersect(white,black1);
+	wb2 = intersect(white,black2);
+	inter = intersect(wb1,wb2);
+	if(area(white) > (area(wb1)+area(wb2)-area(inter))){
+		cout << "Yes";
+	}
+	else{
+		cout << "No";
+	}
+	return 0; 
+}
+
+/* There are some obsevations which can help solving this problem.
+-> The co-ordinates of the intersecting area are some how related with the co-ordinates of the original two rectangles.
+-> The cases which are drawn in many if..else conditions can be logically given in an expression of min and max when observed the pattern of the values of the if...else conditions or the nature of if...else conditions. */

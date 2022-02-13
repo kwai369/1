@@ -1,0 +1,67 @@
+/* The problem statement can be found at the below link. 
+http://www.usaco.org/index.php?page=viewproblem2&cpid=526 */
+/* This a partial solution(Specifically mistake in art of programming). */
+/* The first solution is  the effecient and correct solution that passes all testcases. */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+  freopen("censor.in", "r", stdin);
+  freopen("censor.out", "w", stdout);
+
+  string S, T;
+  cin >> S >> T;
+
+  string R;
+  for(int i = 0;i < S.size();i++){
+	R += S[i];
+
+    if (R.size() >= T.size() && R.substr(R.size() - T.size()) == T) {
+		R.resize(R.size() - T.size());
+    }
+  }
+  cout << R << endl;
+  return 0;
+}
+
+/* The second solution is a bit ineffecient but currect solution it does not pass all the testcases because of time limit exceed. */
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+bool findsubstr(string str,string str1){
+	size_t found = str.find(str1);
+	if(found != string::npos){
+		return true;
+	}
+	return false;
+}
+
+string deletesubstr(string str,string str1){
+	size_t pos = str.find(str1);
+	if(pos != string::npos){
+		str.erase(pos,str1.length());
+	}
+	return str;
+}
+
+int main(){
+	freopen("censor.in","r",stdin);
+	freopen("censor.out","w",stdout);
+	string str,str1;
+	cin >> str >> str1;
+	while(findsubstr(str,str1)){
+		string s = deletesubstr(str,str1);
+		str = s;
+	}
+	cout << str;
+	return 0;
+}
+
+/* By comparing this two solutions we get to learn that we don't have to rely on inbuilt functions and directly implemet them in to the problem.
+But we need to learn to built logic according to the problem.For instance sometimes the problem is really straightforward and asks to do a 
+particular thing which can be done through the direct implementation of one/more inbuilt function/s,but that's not the problem really wants us
+to do the problem wants us to think logically about problem and using that logic form an even more effecient and simpler method than the
+inbuilt functions.Because just implementing the inbuilt functions may not be effecient enough according to the problem,the problem wants us to 
+built our logical skills not our skill of understanding an inbuilt fuction from Geeksforgeeks copying it and pasting(or implementing) it in our program. */   

@@ -1,0 +1,20 @@
+/* The below code shows how to iterate over all permutation using an stl function. */
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	vector<int> v(3);
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
+	do {
+		check(v); // process or check the current permutation for validity
+		for(int i=0;i<3;i++){
+			cout << v[i] << " ";
+		}
+		cout << "\n";
+	}while(next_permutation(v.begin(), v.end()));
+	return 0;
+}
+

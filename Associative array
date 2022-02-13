@@ -1,0 +1,32 @@
+/* The problem statement can be found at the below link.
+https://judge.yosupo.jp/submission/77039 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	map<int,int> m;
+	int n;
+	cin >> n;
+	vector<int> a;
+	while(n){
+		int bit;
+		cin >> bit;
+		if(bit){
+			int k;
+			cin >> k;
+			a.push_back(m[k]);
+		}
+		else{
+			int k,v;
+			cin >> k >> v;
+			m[k] = v; 
+		}
+		n--;
+	}
+	int size = a.size();
+	for(int i=0;i<size;i++){
+		cout << a[i] << "\n";
+	}
+	return 0;
+}
+

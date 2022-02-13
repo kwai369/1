@@ -1,0 +1,29 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=615 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("pails.in","r",stdin);
+	freopen("pails.out","w",stdout);
+	int x,y,m;
+	cin >> x >> y >> m;
+	int size1 = floor(m/x);
+	int size2 = floor(m/y);
+	int val2 = 99999,cur,val1; 
+	for(int i=0;i<=size2;i++){
+		for(int j=0;j<=size1;j++){
+			cur = (x*j) + (y*i);
+			val1 = m - cur;
+			if(val1>=0){
+				val2 = min(val1,val2);
+			}
+			else{
+				break;
+			}
+		}
+	}
+	cout << m - val2;
+	return 0;
+}
+

@@ -1,0 +1,53 @@
+/* The problem staement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=712 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int verify[26][26];
+
+int main(){
+	freopen("circlecross.in","r",stdin);
+	freopen("circlecross.out","w",stdout);
+	string s,s1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	cin >> s;
+	int size = s.length();
+	for(int i=0;i<(size-1);i++){
+		int index = s[i] - 'A';
+		if(!verify[index][index]){
+			int len=i+1;
+			while(s[i]!=s[len]){len++;}
+			len -= i;
+			len--;
+			if(len>0){
+				for(int j=0;j<26;j++){
+					if(index!=j){	
+						int sublen = 0;
+						for(int e=i+1;e<=(i+len);e++){
+							if(s1[j]==s[e]){
+								sublen++;
+							}
+						}
+						if(sublen==2 || sublen==0){
+							verify[index][j] = 0;
+						}
+						else if(sublen==1){
+							if(!verify[j][index]){
+								verify[index][j]=1;	
+							}
+						}
+					}
+				}
+			}
+			verify[index][index] = 1;
+		}
+	}
+	int ans = 0;
+	for(int i=0;i<26;i++){
+		for(int j=0;j<26;j++){
+			ans += verify[i][j];
+		}
+	}
+	cout << (ans-26);
+	return 0;
+} 
+

@@ -1,0 +1,30 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=639 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("diamond.in","r",stdin);
+	freopen("diamond.out","w",stdout);
+	int n,k;
+	cin >> n >> k;
+	int a[n],ans=0;
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	sort(a,a+n);
+	for(int i=0;i<n;i++){
+		int apt = 0;
+		for(int j=i;j<n;j++){
+			if(abs(a[i]-a[j])<=k){
+				apt++;
+			}
+		}
+		if(apt>ans){
+			ans = apt;
+		}
+	}
+	cout << ans;
+	return 0;
+}
+/* This is a brute force solution,When we try to create a brute force solution for a problem think of an effecient way to apply that brute force to the problem */ 

@@ -1,0 +1,27 @@
+/* The problem statement can be found at the below link.
+https://atcoder.jp/contests/abc236/tasks/abc236_b */
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+	int n;
+	cin >> n;
+	int a[4*n];
+	for(int i=0;i<((4*n)-1);i++){
+		cin >> a[i];
+	}
+	a[(4*n)-1] = n+1;
+	sort(a,a+(4*n));
+	int j=0;
+	for(int i=0;i<(4*n);i += 4){
+		if(a[i] == j+1 && a[i+1] == j+1 && a[i+2] == j+1 && a[i+3] == j+1){
+			j++;
+		}
+		else{
+			cout << j+1;
+			break;
+		}
+	}
+	return 0;
+}
+

@@ -1,0 +1,53 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=592 */
+/* This is a partial solution. */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int getexplosion(ll location[],int index,bool goleft,int size){
+	int last_location = index,radius = 1;
+	while(last_location > 0 && last_location < (size-1)){
+		int direction = 0;
+		if(goleft){
+			direction = -1;
+		}
+		else{
+			direction = 1;
+		}
+		int nextindex = last_location;
+		while(nextindex+direction >= 0 && nextindex+direction<size && abs(location[nextindex+direction]-location[last_location]) <= radius){
+			nextindex += direction;
+		}
+		if(nextindex==last_location){
+			break;
+		}
+		last_location = nextindex;
+		radius++;
+	}
+	return last_location;
+}
+
+int main(){
+	freopen("angry.in","r",stdin);
+	freopen("angry.out","w",stdout);
+	int n;
+	cin >> n;
+	ll location[n];
+	for(int i=0;i<n;i++){
+		cin >>  location[i];
+	}
+	sort(location,location+n);
+	int answer = 1;
+	for(int i=0;i<n;i++){
+		int leftcount = getexplosion(location,i,true,n);
+		int rightcount = getexplosion(location,i,false,n);
+		int explosion_count = rightcount - leftcount + 1;
+		if(explosion_count > answer){
+			answer = explosion_count;
+		}
+	}
+	cout << answer;
+	return 0;
+}
+

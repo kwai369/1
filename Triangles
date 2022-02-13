@@ -1,0 +1,80 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=1011 */
+/* The first solution has a different approach,but it satifies all the testcases.The second solution has different approach but it satisfies only seven testcases. */
+/* Try to find the fault in the second solution. */
+/* Solution 1:- */
+#include <iostream>
+#include <vector>
+using namespace std;
+using ll = long long;
+
+int main() {
+  freopen("triangles.in", "r", stdin);
+  freopen("triangles.out", "w", stdout);
+  ll n;
+  cin >> n;
+  vector<ll> X(n, 0);
+  vector<ll> Y(n, 0);
+  for(ll i=0; i<n; i++) {
+    cin >> X[i] >> Y[i];
+  }
+  // i will be corner
+  // j will be flat (same x-coordinate as i)
+  // k will be same y-coordinate as i
+  ll best = -1;
+  for(ll i=0; i<n; i++) {
+    for(ll j=0; j<n; j++) {
+      for(ll k=0; k<n; k++) {
+        if(Y[i]==Y[j] && X[i]==X[k]) {
+          ll area = (X[j]-X[i]) * (Y[k]-Y[i]);
+          if(area < 0) { area *= -1; }
+          if(area > best) {
+            best = area;
+          }
+        }
+      }
+    }
+  }
+  cout << best << endl;
+}
+/* Solution 2:- */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+ll triarea(int x1,int y1,int x2,int y2,int x3,int y3){
+	ll side1 = ((x1-x2)*(x1-x2)) + ((y1-y2)*(y1-y2));
+	ll side2 = ((x2-x3)*(x2-x3)) + ((y2-y3)*(y2-y3));
+	ll side3 = ((x3-x1)*(x3-x1)) + ((y3-y1)*(y3-y1));
+	if(side1 == (side2+side3) || side2 == (side1+side3) || side3 == (side2+side1)){
+		ll area1 = abs((x1*(y2-y3)) + (x2*(y3-y1)) + (x3*(y1-y2)));
+		return area1;
+	}
+	else{
+		return 0;
+	}
+}
+
+int main(){
+	freopen("triangles.in","r",stdin);
+	freopen("triangles.out","w",stdout);
+	int n;
+	cin >> n;
+	vector<pair<ll,ll>> coordinates(n);
+	for(int i=0;i<n;i++){
+		cin >> coordinates[i].first >> coordinates[i].second;
+	}
+	ll ans=0,area; 
+	for(int i=0;i<n;i++){
+		for(int j=i+1;j<n;j++){
+			for(int k=j+1;k<n;k++){
+				area = triarea(coordinates[i].first,coordinates[i].second,coordinates[j].first,coordinates[j].second,coordinates[k].first,coordinates[k].second);
+				if(area){
+					ans = max(ans,area);
+				}
+			}
+		}
+	}
+	cout << ans;
+	return 0;
+}

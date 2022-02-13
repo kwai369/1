@@ -1,0 +1,27 @@
+/* The problem statement can be found at the below link. 
+https://cses.fi/problemset/result/3493196/ */
+/* This is a partial solution. */
+#include<bits/stdc++.h>
+using namespace std;
+
+void solve(){
+	int n,sum;
+	cin >> n >> sum;
+	map<int,int> mp;
+	for(int i=0;i<n;i++){
+		int a;
+		cin >> a;
+		if(mp.find(sum-a) != mp.end()){
+			cout << mp[sum-a]+1 << " " << i+1;
+			return;
+		}
+		mp[a] = i;
+	}
+	cout << "IMPOSSIBLE";
+}
+
+int main(){
+	solve();
+	return 0;
+}
+ 
