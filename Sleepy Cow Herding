@@ -1,0 +1,31 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=915 */
+/* This is a partial solution.*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("herding.in","r",stdin);
+	freopen("herding.out","w",stdout);
+	int a[3];
+	
+	for(int i=0;i<3;i++){
+		cin >> a[i];
+	}
+	sort(a,a+3);
+	if(a[0]+2==a[2]){
+		cout << 0 << "\n";
+	}
+	else if(a[0]+2==a[1] || a[1]+2 == a[2]){
+		cout << 1 << "\n";
+	}
+	else{
+		cout << 2 << "\n";
+	}
+	cout << max(a[1]-a[0],a[2]-a[1]) - 1;
+	return 0;
+}
+/* There are two mistakes that we have done in this problem they are as follows. 
+-> Draw lots of small cases to gain a better understanding of the problem. If you're having trouble debugging, draw more cases. If you don't know how to start with a problem, draw more cases. Whenever you don't know how to further approach a problem, you're probably missing an important observation, so draw more cases and make observations about properties of the problem.
+-> Don't get stuck on any specific idea, unless you see an entire solution. Trying to complete search an ad hoc problem could end up wasting a lot of your time in contest.
+

@@ -1,0 +1,48 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=1107 */
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<string> animals = {"Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig", "Rat"};
+
+string findanimal(int year){
+	int a = 0,y = 0;
+	while(y<year){
+		year--;
+		a++;
+		if(a==12){
+			a = 0; 
+		}
+	}
+	while(y>year){
+		year++;
+		a--;
+		if(a==-1){
+			a = 11;
+		}
+	}
+	return animals[a];
+}
+
+map<string,int> mp;
+int main(){
+	int n;
+	cin >> n;
+	mp["Bessie"] = 0;
+	string name1, born, in, relation, animal, year, from, name2;
+	for(int i=0;i<n;i++){
+		cin >> name1 >> born >> in >> relation >> animal >> year >> from >> name2;
+		mp[name1] = mp[name2];
+		do{
+			if(relation=="previous"){
+				mp[name1]--;
+			}
+			else{
+				mp[name1]++;
+			}
+		}while(findanimal(mp[name1]) != animal);
+	}
+	cout << abs(mp["Bessie"]-mp["Elsie"]);
+	return 0;
+}
+

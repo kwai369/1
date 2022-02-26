@@ -1,0 +1,24 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1643/ */
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+int main(){
+	int n;
+	cin >> n;
+	vector<long long> pfx(n + 1);  
+	for (int i = 1; i <= n; i++){
+		ll x;
+		cin >> x;
+		pfx[i] = pfx[i - 1] + x;  
+	}
+	ll max_subarray_sum = pfx[1];
+	ll min_prefix_sum = pfx[0];
+	for (int i = 1; i <= n; i++){
+		max_subarray_sum = max(max_subarray_sum, pfx[i] - min_prefix_sum);
+		min_prefix_sum = min(min_prefix_sum, pfx[i]);
+	}
+	cout << max_subarray_sum << endl;
+}
+

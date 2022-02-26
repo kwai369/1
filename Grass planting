@@ -1,0 +1,50 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=894 */
+/* the first solution is quite ineffecient in implementing the main idea.*/
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 100000;
+vector<int> tree[MAXN];
+int N;
+
+int main(){
+    freopen("planting.in","r",stdin);
+    freopen("planting.out","w",stdout	);
+    cin >> N;
+    for(int i=0;i<N-1;i++){
+        int a,b;
+        cin >> a >> b;
+        a--;
+        b--;
+        tree[a].push_back(b);
+        tree[b].push_back(a);
+    }
+    int ans=0;
+    for(auto a:tree){
+        int maxi = a.size();
+        ans = max(ans,maxi);
+    }
+    cout << ans+1;
+}
+/*The second solution is quite effecient in implementation details.*/ 
+#include <iostream>
+using namespace std;
+ 
+int N,a,b;
+int d[100000];
+ 
+int main()
+{
+	cin >> N;
+	for(int i=1;i<N;i++)
+	{
+		cin >> a >> b;
+		d[a-1]++, d[b-1]++;
+	}
+	int D = 0;
+	for(int i=0;i<N;i++)
+		if(d[i] > D)
+			D = d[i];
+	cout << D+1 << '\n';
+}
+

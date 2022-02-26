@@ -1,0 +1,62 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=687 */
+#include<bits/stdc++.h>
+using namespace std;
+
+unordered_map<string,int> mp;
+vector<string> s{"Bessie","Elsie","Daisy","Gertie", "Annabelle", "Maggie", "Henrietta"};
+string answer(int element,string ans1){
+	for(int i=0;i<7;i++){
+		if(mp[s[i]] == element){
+			ans1 = "Tie";
+			return ans1;
+		}
+	}
+	return ans1;
+}
+
+int main(){
+	freopen("notlast.in","r",stdin);
+	freopen("notlast.out","w",stdout);
+	for(int i=0;i<int(s.size());i++){
+		mp[s[i]] = 0;
+	}
+	int n;
+	cin >> n;
+	for(int i=0;i<n;i++){
+		string s1;
+		int aux;
+		cin >> s1 >> aux;
+		mp[s1] += aux;
+	}
+	set<int> a;
+	for(int i=0;i<int(s.size());i++){
+		a.insert(mp[s[i]]);
+	}
+	int second_smallest = 0;
+	int j = 0;
+	for(int element : a){
+		if(j==1){
+			second_smallest = element;
+			break;
+		}
+		j++;
+	}
+	if(a.size()==1){	
+		cout << "Tie";
+	}	
+	else{	
+		string ans;
+		for(int i=0;i<7;i++){
+			if(mp[s[i]]==second_smallest){
+				ans = s[i];
+				mp[s[i]] = 0;
+				break;
+			}
+		}
+		ans = answer(second_smallest,ans);
+		cout << ans << "\n";
+	}
+	return 0;
+}
+

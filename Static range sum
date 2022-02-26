@@ -1,0 +1,51 @@
+/* The problem statement can be found at the below link.*/
+/* https://judge.yosupo.jp/problem/static_range_sum */
+/* To calculate the sum of subarray we usually go with 1 indexing instead of 0 indexing .The below two programs do the same thing that is calculate the sum of subarray but the first program do it with 1 indexing and the second do it with 0 indexing.*/
+/* With 1 indexing.*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int n,q;
+	cin >> n >> q;
+	int a[n+1];
+	a[0] = 0;
+	for(int i=1;i<n+1;i++){
+		cin >> a[i];
+		a[i] += a[i-1];
+	}
+	while(q){
+		int b,c;
+		cin >> b >> c;
+		cout << a[c]-a[b-1] << "\n"; 
+		q--;
+	}
+}
+
+/* With 0 indexing.*/
+int main(){
+	int n,q;
+	cin >> n >> q;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+		if(i){
+			a[i] += a[i-1];
+		}
+		cout << a[i] << "\n";
+	}
+	while(q){
+		int b,c;
+		cin >> b >> c;
+		b--,c--;
+		if(b){
+			cout << a[c] - a[b-1] << "\n";
+		}
+		else{
+			cout << a[c] << "\n";
+		}
+		q--;
+	}
+}
+
+ 

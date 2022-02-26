@@ -1,0 +1,94 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=892 */
+/* The first solution is a partial solution. */
+#include <iostream>
+using namespace std;
+  
+int main(){
+	freopen("sleepy.in","r",stdin);
+	freopen("sleepy.out","w",stdout);
+	int n;
+	cin >> n;
+	int a[n];
+	for(int i=0;i<n;i++)
+		cin >> a[i];
+	int ans = n-1;
+	for(int i=n-2;i>=0;i--)
+	{
+		if(a[i] < a[i+1])
+			ans = i;
+		else
+			break;
+	}
+	cout << ans << '\n';
+	return 0;
+}
+/* The second solution is not a partial solution. */
+#include<bits/stdc++.h>
+using namespace std;
+
+int issorted(int b[],int size){
+	for(int i=0;i<size;i++){
+		if(b[i]!=i){
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int main(){
+	freopen("sleepy.in","r",stdin);
+	freopen("sleepy.out","w",stdout);
+	int n;
+	cin >> n;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+		a[i]--;
+	}
+	int ans=0;
+	while(issorted(a,n)){
+		int mini = 0,index = 0,diff=99999;
+		for(int i=2;i<n;i++){
+			mini = abs(a[0]-a[i]);
+			if(mini<diff){
+				diff = mini;
+				index = i;
+			}
+		}
+		int aux[n];
+		if(a[index]>a[0]){
+			aux[index-1] = a[0];
+			aux[index] = a[index];
+			for(int i=1;i<index;i++){
+				aux[i-1] = a[i];
+			}
+			for(int i=index+1;i<n;i++){
+				aux[i] = a[i];
+			}
+		}
+		else{
+			aux[index] = a[0];
+			for(int i=1;i<=index;i++){
+				aux[i-1] = a[i];
+			}
+			for(int i=index+1;i<n;i++){
+				aux[i] = a[i];
+			}
+		}
+		for(int i=0;i<n;i++){
+			a[i] = aux[i];
+		}
+		ans++;
+	}
+	if(ans>n-1){
+		ans = n-1;
+	}
+	cout << ans;
+	return 0;
+}
+/* The mistakes that are done in the second solution are as follows. 
+-> Think specifically of what the problem statement is asking for not what the problem is describing the whole process to us,don't produce the solution that is completely based on this process and do very
+little with what the problem statement is asking for.
+-> Simulate the whole process effeciently with what the problem is asking for.
+-> Ad hoc problems are based on the simpler observations not on a complicated mathematical model with respect to the problem.*/

@@ -1,0 +1,72 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=893 */
+/* The first solution is the solution given in the editorial and it is a correct solution but the second solution is produced by us,though second solution is incorrect one.*/
+/* Analysis of the first solution.*/
+/* This is a nice example of a problem where half the work goes into figuring out useful structural properties of the solution, and then the other half goes into writing code to search for a solution based on this knowledge. In this case, let M be the maximum number of characteristics any two cows have in common, over all pairs of cows. We claim that M+1 is the answer.
+Here is a simple argument. If we pick two cows (say A and B) that have M traits in common, then we can ask about just those traits, generating M "yes" answers and leaving a feasible set that still contains A and B. Hence, the maximum number of "yes" answers in a transcript could be larger than M. On the other hand, the number of "yes" answers in any transcript cannot be larger than M+1. Suppose we have a transcript involving M+1 yes answers after which there are still multiple cows in our feasible set. If so, those cows must have had more than M traits in common, which cannot be the case! After M+1 "yes" answers, we therefore must have reduced the feasible set down to at most a single cow.*/
+/*The code is as follows.*/
+#include<bits/stdc++.h> 
+using namespace std;
+ 
+int N;
+vector<string> characteristics[100];
+ 
+int num_common(int i, int j){
+  int count = 0;
+  vector<string> &v1 = characteristics[i], &v2 = characteristics[j];
+  for (int i=0; i<v1.size(); i++)
+    for (int j=0; j<v2.size(); j++)
+      if (v1[i] == v2[j]) count++;
+  return count;
+}
+ 
+int main(void){
+  freopen("guess.in","r",stdin);
+  freopen("guess.out","w",stdout);
+  cin >> N;
+  string s;
+  for (int i=0; i<N; i++) {
+    int K;
+    cin >> s >> K;
+    for (int j=0; j<K; j++) {
+      cin >> s;
+      characteristics[i].push_back(s);
+    }
+  }
+    
+  int largest = 0;
+  for (int i=0; i<N; i++)
+    for (int j=i+1; j<N; j++)
+      largest = max(largest, num_common(i,j));
+ 
+  cout << largest+1 << "\n";
+  return 0;
+}
+/* Analysis of the second solution.*/
+/* In second solution the mistake is that it calculates the maximum number of times a particular characteristic is present.This observation is based on the pattern of the input and that is why this observation
+is wrong.*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("guess.in","r",stdin);
+	freopen("guess.out","w",stdout);
+	int n,k;
+	map<string,int> mp;
+	cin >> n;
+	for(int i=0;i<n;i++){
+		string s;
+		cin >> s >> k;
+		for(int j=0;j<k;j++){
+			cin >> s;
+			mp[s] += 1;
+		}
+	}
+	int maxi = 0;
+    for(const auto &it : mp){
+        maxi = max(it.second,maxi);
+    }
+    cout << maxi;
+	return 0;
+}
+

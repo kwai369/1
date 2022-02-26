@@ -1,0 +1,67 @@
+/* The problem statement can be found  at the below link*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=785 */
+/* In this problem, we're given a list of N integers, with the guarantee that removing exactly one of them can result in a sorted array. Because removing one of them can result in a sorted array, if we consider the elements that are not in the right order, those must form a sequence that is almost sorted, except that either the minimum element is in the rightmost slot or the maximum element is in the leftmost slot. Consequently, if there are K elements that are out of order, it will take K−1 swaps to fix them, since every swap except for the last one can only fix the location of one such element. */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("outofplace.in","r",stdin);
+	freopen("outofplace.out","w",stdout);
+	unordered_set<int> s;
+    int n;
+    cin >> n;
+    for(int i=0;i<n;i++){
+        int a;
+        cin >> a;
+        s.insert(a);
+    }
+    n = s.size();
+    int a[n];
+    int i = n-1;
+    for(int element : s){
+        a[i] = element;
+        i--;
+    }
+    int index;
+    for(int j=0;j<(n-1);j++){
+        if(a[j]>a[j+1]){
+            index = j+1;
+            break;
+        }
+    }
+    int ans = 0,j=index-1;
+    while(a[index]<a[j] && j>0){
+        j--;
+        ans++;
+    }
+    cout << ans;
+    return 0;
+}
+
+/* There is an alternative solution which is as follows. */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("outofplace.in","r",stdin);
+	freopen("outofplace.out","w",stdout);
+	int n;
+	cin >> n;
+	int h[n],s[n];
+	for(int i=0;i<n;i++){
+		cin >> h[i];
+		s[i] = h[i];
+	}	
+	sort(s,s+n);
+	int swap = -1;
+	for(int i=0;i<n;i++){
+		if(s[i]!=h[i]){
+			swap++;
+		}
+	}
+	swap =  max(0,swap);
+	cout << swap;
+	return 0;
+}
+
+

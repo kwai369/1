@@ -1,0 +1,51 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1662/ */
+/* This asks us to compute the subarrays whose sum is divisible by n.*/
+/* The first solution don't satisfy all the testcases because it fails when the elements of the array are negative.*/
+/* Solution 1: */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int MAXN = 2e5;
+
+ll a[MAXN];
+int n;
+
+int main(){
+	cin >> n;
+	map<int,int> mp;
+	mp[0]++;
+	ll s = 0,ans=0;
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+		s = (s+a[i])%n;
+		ans += mp[s];
+		mp[s]++;
+	}
+	cout << ans;
+	return 0;
+}
+/* So to cover the counter cases that is when the elements of the array are negative.There is small change in the code which helps us to get the full credit.*/
+/* Solution 2: */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int MAXN = 2e5;
+
+ll a[MAXN];
+int n;
+
+int main(){
+	cin >> n;
+	map<int,int> mp;
+	mp[0]++;
+	ll s = 0,ans=0;
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+		s = (s+a[i]%n+n)%n; // here we have done the mod of a[i] first because to get the remainder of the negative integer which and add n so it becomes a positive integer whose remainder is same as 
+		ans += mp[s]; // the negative integer and then we have performed the usual process. 
+		mp[s]++;
+	}
+	cout << ans;
+	return 0;
+}

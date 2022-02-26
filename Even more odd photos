@@ -1,0 +1,99 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=1084 */
+/* The first solution is the solution given in the editorial it is more effecient then the second solution which is produced by us. Although both the solutions are correct.*/
+/* Analysis of the first solution is as follows. */
+/*In the best case, each cow is in its own group, and the answer is N.When is this allowed to happen?
+Let O be the number of odd cows and E be the number of even cows initially in the list. For each cow to be in its own group, either E=O or E=O+1.
+If this is not the case, then we must have groups with more than one cow. There are two cases.If E>O+1,then the problem is that we have too many even cows.
+ However, note that two even numbers added together is an even number. Therefore, we can do the assignment as follows - take one even cow, then one odd cow, and repeat this O times. The remaining cows are all even, and we can put them all in the same group. In this case, the answer is 2(O)+1.The other case is when E<O,so we have too many odd cows. Note that two odd numbers added together is an even number. To deal with having too many odd cows, we have to take two odd cows and pair them, which is equivalent to having two fewer odd cows and one more even cow. We can repeat this process of pairing two odd cows until E≥O, and then we can use the above logic to compute the answer.*/
+ /* The code is as follows. */
+ #include <iostream>
+using namespace std;
+ 
+int main(void)
+{
+  int O=0, E=0, N, x;
+  cin >> N;
+  for (int i=0; i<N; i++) {
+    cin >> x;
+    if (x % 2 == 0) E++; else O++;
+  }
+  while (O > E) { O=O-2; E++; }
+  if (E > O+1) E = O+1;
+  cout << E + O << "\n";
+}
+/* Analysis of the second solution is as follows.*/
+/*The second solution has somewhat similar approach to the first solution but the implementation details of the first solution is more effecient.Here we have taken two vectors(that is dynammic arrays) even and 
+odd the size of even vector indicates the number of even integers present in the input array a, similar with the odd vector.If there is going to be no odd integer in the input array then we only form one group
+and that is of even intger.But if there is going to be atleast one odd integer then we are going to create a vector name logic whose size is going to indicate the maximum number of groups that can be formed.*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	int a[n];
+	vector<int> even,odd;
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+		if(a[i]%2){
+			odd.push_back(1);
+		}
+		else{
+			even.push_back(1);
+		}
+	}
+	if(odd.empty()){
+		cout << 1;
+	}
+	else{
+		vector<int> logic;
+		while(!(even.empty()) || !(odd.empty())){
+			if(logic.empty()){
+				if(even.empty()){ 
+                    odd.pop_back();
+				    odd.pop_back();
+				    logic.push_back(0);
+                }
+                else{
+                    even.pop_back();
+                    logic.push_back(0);
+                }
+            }
+			else if(logic[logic.size()-1]){
+				if(even.empty()){
+					if(odd.size() >= 2){
+						odd.pop_back();
+						odd.pop_back();
+						logic.push_back(0);
+					}
+					else{
+						odd.pop_back();
+                        logic.push_back(1);
+					}
+				}
+				else{
+					even.pop_back();
+					logic.push_back(0);
+				}
+			}
+			else{
+				if(odd.empty()){
+					break;
+				}
+				else{
+					odd.pop_back();
+                    logic.push_back(1);
+				}
+			}
+		}		
+		if(logic[logic.size()-1]  == logic[logic.size()-2]){
+			logic.pop_back();
+			logic.pop_back();
+		}
+		cout << logic.size();
+	}
+    return 0;
+}
+ 
+

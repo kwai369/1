@@ -1,0 +1,55 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=689 */
+/* Explanation:- In this problem, we have a rectangles of zeroes and ones. A "toggle" of a subrectangle consists of taking every 0 in the rectangle and turning it into a 1, and taking every 1 in the rectangle and turning it into a 0. We want to toggle as few subrectangles as possible to turn every number in the rectangle to zero.
+
+If we look at the various squares in the grid, we see that the ones closer to the top-left corner can be toggled by more subrectangles, whereas the ones closer to the bottom-right corner can be toggled by fewer subrectangles. In particular, we note that the bottom-right corner can only be toggled by one subrectangle - the entire rectangle. Whether we need to toggle the entire rectangle then is entirely determined by whether the bottom-right corner needs to be toggled.
+
+After we decide whether to toggle that one, we can now consider the square that is directly to the left of the bottom-right corner. That square can now only be toggled by one rectangle, and the decision there is uniquely determined as well. We can then consider every square in the bottom row from right-to-left and toggle the subrectangle when that square needs to be toggled.
+
+After inspecting every square in the bottom row, it is guaranteed that the bottom row is entirely zeroes. Thus, one can treat the rectangle as if it had one fewer row, and we can repeat the above process again. We do this repeatedly until the entire rectangle is correctly formatted. */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	// Initailise file I/O
+	freopen("cowtip.in","r",stdin);
+	freopen("cowtip.out","w",stdout);
+	// Size of the grid
+	int n;
+	// input of the size of grid into n
+	cin >> n;
+	// Declare a grid of size n*n
+	char a[n][n];
+	// Input each character of the grid
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			cin >> a[i][j];
+		}
+	} 
+	// For taking note of how many times we have to toggle a subgrid
+	int ans=0;
+	// loop over the rectangles to consider from bottom to top, right to left
+	for(int i=n-1;i>=0;i--){
+		for(int j=n-1;j>=0;j--){
+			if(int(a[i][j])==49){
+				// the rectangles with bottom-right corner at (i, j) needs to be toggled
+				for(int e=0;e<=i;e++){
+					for(int t=0;t<=j;t++){
+						// flip each entry in that rectangle
+						if(int(a[e][t])==49){
+							a[e][t] = '0';
+						}
+						else{
+							a[e][t] = '1';
+						}
+					}
+				}
+				ans++;
+			}
+		}
+	}
+	//Print the minimum number of times we toggle a subgrid 	
+	cout << ans;
+	return 0;
+}
+

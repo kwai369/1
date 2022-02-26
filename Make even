@@ -1,0 +1,48 @@
+/* The problme statement can be found at the below link.*/
+/* https://codeforces.com/contest/1611/problem/A    */
+#include<bits/stdc++.h>   
+#define ll long long
+using namespace std;
+     
+void solve(){
+	ll n;
+    	cin >> n;
+    	if(n%2){	
+    		vector<int> a;
+    		ll cunt = 0,count=0;
+    		while(n!=0){
+    			int ans=0;
+    			ans = n%10;
+    			n = n/10;
+    			a.push_back(ans);
+    			if(ans%2){
+    				cunt++;
+    			}
+    			count++;
+    		}
+    		if(cunt==a.size()){
+    			cout << -1 << "\n";
+    		}
+    		else{
+    			if(a[count-1]%2){
+    				cout << 2 << "\n";
+    			}
+    			else{
+    				cout << 1 << "\n";
+    			}
+    		}		
+    	}
+    	else{
+    		cout << 0 << "\n";
+    	}
+}
+     
+int main(){
+  int t;
+   cin >> t;
+    while(t){
+    	solve();
+    	t--;
+    }
+    return 0;
+   }

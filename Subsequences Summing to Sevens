@@ -1,0 +1,35 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=595 */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	freopen("div7.in","r",stdin);
+	freopen("div7.out","w",stdout);
+	int n;
+	cin >> n;
+	ll a[n+1];
+	a[0]=0;
+	for(int i=1;i<=n;i++){
+		cin >> a[i];
+		a[i] += a[i-1];
+	}
+	int ans=0;
+	for(int i=n;i>0;i--){
+		int maxi = 0;
+		for(int j=1;j<=(n-i)+1;j++){
+			if(!((a[i+(j-1)] - a[j-1])%7)){
+				maxi++;
+				break;
+			}
+		}
+		if(maxi>ans){
+			ans=i;
+			break;
+		}
+	}
+	cout << ans;
+	return 0;
+}
+

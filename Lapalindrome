@@ -1,0 +1,61 @@
+/* The problem statement can be found at the below link. */
+/* https://www.codechef.com/problems/LAPIN */
+/* The simplest approach for this problem is to divide the string in two halves and check that if they are unequal or not. If not then the answer is "YES" if yes then answer is "NO".*/  
+#include<bits/stdc++.h>
+using namespace std;
+
+int solve(){
+	string s; // Input string s
+	cin >> s;
+	// We take two substrings when we divide s into two halves
+	string substr1,substr2; 
+	// Because length of string is not given
+	int size = s.length(); 
+	// checks if the size is even or odd
+	if(size % 2 == 0){
+		// Stores one half of the string s in substr1
+		substr1 = s.substr(0,size/2);
+		// Stores second half of the string s in substr2
+		substr2 = s.substr(size/2,size/2); 
+	}
+	else{
+		// Stores one half of the string s in substr1
+		substr1 = s.substr(0,floor(size/2));
+		// Stores second half of the string s ignoring the middle character
+		// because size is odd in substr2 
+		substr2 = s.substr(floor(size/2)+1,floor(size/2));
+	}
+	// Sorts one half of the string s
+	sort(substr1.begin(),substr1.end());
+	// Sorts second half of the string s
+	sort(substr2.begin(),substr2.end());
+	int i=0;
+	// Compares if both the halves are equal or not.
+	for(char element : substr1){
+		// if at least one charcater of first half is unequal or its 
+		// frequency is unequal to one character of second half. Then
+		// both the string is not a lapalindrome.  
+		if(element!=substr2[i]){
+			return 0;
+		}
+		i++;
+	}
+	return 1;
+}
+
+int main(){
+	int t;
+	cin >> t;
+	while(t){
+		int ans = solve();
+		if(ans){
+			cout << "YES" << "\n";
+		}
+		else{
+			cout << "NO" << "\n";
+		}
+		t--;
+	}
+    return 0;
+}
+
