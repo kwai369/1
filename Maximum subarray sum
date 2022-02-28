@@ -1,8 +1,9 @@
 /* The problem statement can be found at the below link.*/
 /* https://cses.fi/problemset/task/1643/ */
 /* For this problem we have produced two solutions the first one is a brute force which does not satisfy all the testcases because it exceeds
-time limit in some testcase and the second one is an effecient one which satisfies all testcases.*/
-/* Solution 1:-*/
+time limit in some testcase and the second one is an effecient one which satisfies all testcases.There is one more solution to this problem
+that is based on Kadane's algorithm.*/
+/* Solution 1(brute force solution(satisfying not all testcases)):-*/
 #include<bits/stdc++.h>
 #define ll long long
 using namespace std;
@@ -46,6 +47,25 @@ int main(){
 	for(int i=1;i<=n;i++){
 		maxi = max(maxi,pfr[i]-mini);
 		mini = min(mini,pfr[i]);
+	}
+	cout << maxi;
+}
+/* Solution 3(Based on Kadane's algorithm):-*/
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	vector<ll> vec(n);
+	for(int i=0;i<n;i++){
+		cin >> vec[i];
+	}
+	ll curr = vec[0],maxi=vec[0];
+	for(int i=1;i<n;i++){
+		curr = max(curr+vec[i],vec[i]);
+		maxi = max(maxi,curr);
 	}
 	cout << maxi;
 }
