@@ -1,24 +1,52 @@
 /* The problem statement can be found at the below link.*/
 /* https://cses.fi/problemset/task/1643/ */
+/* For this problem we have produced two solutions the first one is a brute force which does not satisfy all the testcases because it exceeds
+time limit in some testcase and the second one is an effecient one which satisfies all testcases.*/
+/* Solution 1:-*/
 #include<bits/stdc++.h>
+#define ll long long
 using namespace std;
-using ll = long long;
+
+const int MAXN = 2e5+1;
+ll a[MAXN];
 
 int main(){
 	int n;
 	cin >> n;
-	vector<long long> pfx(n + 1);  
-	for (int i = 1; i <= n; i++){
+	for(int i=1;i<=n;i++){
 		ll x;
 		cin >> x;
-		pfx[i] = pfx[i - 1] + x;  
+		a[i] = a[i-1]+x;
 	}
-	ll max_subarray_sum = pfx[1];
-	ll min_prefix_sum = pfx[0];
-	for (int i = 1; i <= n; i++){
-		max_subarray_sum = max(max_subarray_sum, pfx[i] - min_prefix_sum);
-		min_prefix_sum = min(min_prefix_sum, pfx[i]);
+	ll ans=-99999999999;
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=i;j++){
+			if(a[i]-a[j-1]>ans){
+				ans = a[i]-a[j-1];
+			}
+		}
 	}
-	cout << max_subarray_sum << endl;
+	cout << ans;
+}
+/* Solution 2:-*/
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	vector<ll> pfr(n+1,0);
+	for(int i=1;i<=n;i++){
+		int x;
+		cin >> x;
+		pfr[i] = pfr[i-1]+x;
+	}
+	ll maxi = pfr[1],mini=pfr[0];
+	for(int i=1;i<=n;i++){
+		maxi = max(maxi,pfr[i]-mini);
+		mini = min(mini,pfr[i]);
+	}
+	cout << maxi;
 }
 
