@@ -1,5 +1,43 @@
 /* The problem statement can be found at the below link.*/
 /* https://cses.fi/problemset/task/1652/ */
+/* There are two solutions to this problem the first solution satisfies the time limit when Q=10^5 and N=10^3.But the when we increase range of Q and N
+then the first solution is slow that is were second solution which the more effecient one satisfies the time limit. */
+/* Solution 1:-*/
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	int n,q;
+	cin >> n >> q;
+	int a[n+1][n+1];
+	for(int i=0;i<=n;i++){
+		for(int j=0;j<=n;j++){
+			a[i][j]=0;
+		}
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			char s;
+			cin >> s;
+			if(s=='*'){
+				a[i][j]=1;
+			}
+			a[i][j] += a[i][j-1];
+		}
+	}	
+	for(int i=0;i<q;i++){
+		int x1,x2,y1,y2;
+		cin >> x1 >> y1 >> x2 >> y2;
+		ll sum = 0;
+		for(int j=x1;j<=x2;j++){
+			sum += a[j][y2]-a[j][y1-1];
+		}
+		cout << sum << '\n';
+	}
+}
+
+/* Solution 2:- */
 #include <bits/stdc++.h>
 using namespace std;
 
