@@ -1,0 +1,77 @@
+/* The problem statement can be found at the below link.*/
+/* https://atcoder.jp/contests/abc241/tasks/abc241_b */
+/* The below given both the solutions are correct but the first one is more effecient then the second on.*/
+/* Solution 1:-*/
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+void solve(){
+	int n,m;
+	cin >> n >> m;
+	multiset<ll> st;
+	for(int i=0;i<n;i++){
+		int a;
+		cin >> a;
+		st.insert(a);
+	}
+	for(int i=0;i<m;i++){
+		int a;
+		cin >> a;
+		auto it = st.find(a);
+		if(it != st.end()){
+			st.erase(it);
+		}
+		else{
+			cout << "No"; 
+			return;
+		}
+	}
+	cout << "Yes";
+}
+
+int main(){
+	solve();
+}
+/* Solution 2:-*/
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int solve(){
+	int n,m;
+	cin >> n >> m;
+	ll a[n],b[m];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	for(int i=0;i<m;i++){
+		cin >> b[i];
+	}
+	vector<int> al(n,0),bl(m,0);
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+			if(b[i] == a[j]){
+				if(!al[j]){
+					bl[i] = 1;
+					al[j] = 1;
+					break;
+				}
+			}
+		}
+	}
+	for(int i=0;i<m;i++){
+		if(!bl[i]){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int main(){
+	int ans = solve();
+	if(ans){cout << "Yes";}
+	else{cout << "No";}
+}
+
+

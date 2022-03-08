@@ -1,0 +1,58 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=1061 */
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+const int MAXN = 50;
+ll x[MAXN],y[MAXN];
+
+bool cmp1(int a,int b){
+	return y[a] < y[b];
+}
+
+bool cmp2(int a,int b){
+	return x[a] < x[b];
+}
+
+int main(){
+	int n;
+	cin >> n;
+	vector<int> east,north;
+	for(int i=0;i<n;i++){
+		char ch;
+		cin >> ch >> x[i] >> y[i];
+		if(ch=='E'){
+			east.push_back(i);
+		}
+		else{
+			north.push_back(i);
+		}
+	}
+	sort(east.begin(),east.end(),cmp1);
+	sort(north.begin(),north.end(),cmp2);
+	vector<bool> vec(n,0);
+	vector<int> vec1(n,-1); 
+	for(int i : east){
+		for(int j : north){
+			if(!vec[i] && !vec[j] && x[i]<x[j] && y[j]<y[i]){
+				if(x[j]-x[i] > y[i]-y[j]){
+					vec[i] = true;
+					vec1[i] = x[j]-x[i];
+				}
+				else if(y[i]-y[j] > x[j]-x[i]){
+					vec[j] = true;
+					vec1[j] = y[i]-y[j];
+				}
+			}
+		}
+	}
+	for(int i=0;i<n;i++){
+		if(vec1[i]==-1){
+			cout << "Infinity" << "\n";
+			continue;
+		}
+		cout << vec1[i] << "\n";
+	}
+}
+

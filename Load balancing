@@ -1,0 +1,55 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=617 */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("balancing.in","r",stdin);
+	freopen("balancing.out","w",stdout);
+	int n,b;
+	cin >> n >> b;
+	int x[n],y[n];
+	for(int i=0;i<n;i++){
+		cin >> x[i] >> y[i];
+	} 
+	int ans=n;
+	for(int xindex=0;xindex<n;xindex++){
+		for(int yindex=0;yindex<n;yindex++){
+			int xdiv = x[xindex]+1;
+			int ydiv = y[yindex]+1;
+			int upperleft=0,upperright=0,lowerleft=0,lowerright=0;
+			for(int i=0;i<n;i++){
+				if(x[i]<xdiv && y[i]<ydiv){
+					lowerleft++;
+				}
+				if(x[i]<xdiv && y[i]>ydiv){
+					upperleft++;
+				}
+				if(x[i]>xdiv && y[i]<ydiv){
+					lowerright++;
+				}
+				if(x[i]>xdiv && y[i]>ydiv){
+					upperright++;
+				}
+			}
+			int worstregion=0;
+			if(worstregion<upperleft){
+				worstregion = upperleft;
+			}
+			if(worstregion<upperright){
+				worstregion = upperright;
+			}
+			if(worstregion<lowerleft){
+				worstregion = lowerleft;
+			}
+			if(worstregion<lowerright){
+				worstregion = lowerright;
+			}
+			if(worstregion<ans){
+				ans = worstregion;
+			}
+		}
+	}
+	cout << ans; 
+}
+

@@ -1,0 +1,30 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/problemset/problem/1624/D */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t;
+	cin >> t;
+	for(int _=0;_<t;_++){
+		int n,k;
+		string s;
+		cin >> n >> k >> s;
+		vector<int> cnt(26);
+		for(char e:s){
+			cnt[e-'a']++;
+		}
+		int cntpair=0,cntodd=0;
+		for(int e:cnt){
+			cntpair += e/2;
+			cntodd += e%2;
+		}
+		int ans = 2*(cntpair/k);
+		cntodd += 2*(cntpair%k);
+		if(cntodd>=k){
+			ans++;
+		}
+		cout << ans << "\n"; 
+	}
+}
+

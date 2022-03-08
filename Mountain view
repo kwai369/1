@@ -1,0 +1,73 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=896 */
+/* First solution:-*/
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int MAXN = 1e5;
+
+int x[MAXN],y[MAXN],N;
+int pos[MAXN],neg[MAXN],cid[MAXN];
+
+bool cmp(int a,int b){
+	if(pos[a]==pos[b]){
+		return neg[a] < neg[b];
+	}
+	return pos[a] > pos[b];
+}
+
+int main(){
+	freopen("mountains.in","r",stdin);
+	freopen("mountains.out","w",stdout);
+	cin >> N;
+	for(int i=0;i<N;i++){
+		cin >> x[i] >> y[i];
+		pos[i] = x[i]+y[i],neg[i]=x[i]-y[i];
+		cid[i] = i;
+	}
+	sort(cid,cid+N,cmp);
+	int mini = 99999999,ans=0;
+	for(int i=0;i<N;i++){
+		if(neg[cid[i]] < mini){
+			ans++;
+			mini = neg[cid[i]];
+		}
+	}
+	cout << ans;
+}
+/* Second solution:-*/
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int MAXN = 1e5;
+
+int x[MAXN],y[MAXN],N;
+int pos[MAXN],neg[MAXN],cid[MAXN];
+
+bool cmp(int a,int b){
+	if(neg[a]==neg[b]){
+		return pos[a] > pos[b];
+	}
+	return neg[a] < neg[b];
+}
+
+int main(){
+	freopen("mountains.in","r",stdin);
+	freopen("mountains.out","w",stdout);
+	cin >> N;
+	for(int i=0;i<N;i++){
+		cin >> x[i] >> y[i];
+		pos[i] = x[i]+y[i],neg[i]=x[i]-y[i];
+		cid[i] = i;
+	}
+	sort(cid,cid+N,cmp);
+	int maxi = -1,ans=0;
+	for(int i=0;i<N;i++){
+		if(pos[cid[i]] > maxi){
+			ans++;
+			maxi = pos[cid[i]];
+		}
+	}
+	cout << ans;
+}
+

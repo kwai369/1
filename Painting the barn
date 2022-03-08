@@ -1,0 +1,73 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=919 */
+/* There are two solutions to this problem the second solution is more effecient than the first solution.*/
+/* Solution 1:-*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int dp[1000][1001];
+
+int main(){
+	freopen("paintbarn.in","r",stdin);
+	freopen("paintbarn.out","w",stdout);
+	int n,k;
+	cin >> n >> k;
+	while(n){
+		int a,b,c,d;
+		cin >> a >> b >> c >> d;
+		for(int i=a;i<c;i++){
+			dp[i][b]++;
+			dp[i][d]--;
+		}
+		n--;
+	}
+	int ret=0;
+	for(int i=0;i<1000;i++){
+		for(int j=0;j<1000;j++){
+			if(dp[i][j]==k){
+				ret++;
+			}
+			dp[i][j+1] += dp[i][j];
+		}
+	}
+	cout << ret;
+}
+/* Solution 2:-*/
+#include<bits/stdc++.h>
+using namespace std;;
+
+int dp[1000][1000];
+
+int main(){
+	freopen("paintbarn.in","r",stdin);
+	freopen("paintbarn.out","w",stdout);
+	int n,k;
+	cin >> n >> k;
+	for(int i=0;i<n;i++){
+		int a,b,c,d;
+		cin >> a >> b >> c >> d;
+		dp[a][b]++;
+		dp[a][d]--;
+		dp[c][d]++;
+		dp[c][b]--;
+	}
+	int ret=0;
+	for(int i=0;i<1000;i++){
+		for(int j=0;j<1000;j++){
+			if(i){
+				dp[i][j] += dp[i-1][j];
+			}
+			if(j){
+				dp[i][j] += dp[i][j-1];
+			}
+			if(i&&j){
+				dp[i][j] -= dp[i-1][j-1];
+			}
+			if(dp[i][j]==k){
+				ret++;
+			}
+		}
+	}
+	cout << ret;
+}
+

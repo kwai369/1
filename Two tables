@@ -1,0 +1,36 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/problemset/problem/1555/B */
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int INF = int(1e9);
+
+void solve(){
+	int W,H,w,h,x1,x2,y1,y2;
+	cin >> W >> H >> x1 >> y1 >> x2 >> y2 >> w >> h;
+	int ans = INF;
+	if((x2-x1) + w <= W){
+		ans = min(ans,max(0,w-x1));
+		ans = min(ans,max(0,x2-(W-w)));
+	}
+	if((y2-y1) + h <= H){
+		ans = min(ans,max(0,h-y1));
+		ans = min(ans,max(0,y2-(H-h)));
+	} 
+	if(ans==INF){
+		cout << -1 << "\n";
+	}
+	else{
+		cout << ans << "\n";
+	}
+}
+
+int main(){
+	int t;
+	cin >> t;
+	while(t){
+		solve();
+		t--;
+	}
+}
+ 

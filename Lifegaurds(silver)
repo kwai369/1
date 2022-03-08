@@ -1,0 +1,68 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=786 */
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Event {
+	int time;
+	int cowId;
+	bool isStartOfInterval;
+};
+
+bool cmp (const Event& a, const Event& b) {
+	return a.time < b.time;
+}
+
+int main() {
+	freopen("lifeguards.in", "r", stdin);
+	freopen("lifeguards.out", "w", stdout);
+
+	int n;
+	cin >> n;
+	vector<Event> events;
+
+	for (int i = 0; i < n; i++) {
+		int l, r; cin >> l >> r;
+
+		events.push_back({ l, i, 1 });
+		events.push_back({ r, i, 0 });
+	}
+
+	sort(events.begin(), events.end(), cmp); 
+
+	vector<int> aloneTime(n, 0);
+
+	set<int> activeCows;
+
+	int prevTime = 0;
+
+	int totalTime = 0;
+
+	for (auto ev : events) {
+		int curTime = ev.time;
+
+		if (activeCows.size() > 0) {
+			totalTime += curTime - prevTime;
+		}
+
+		if (activeCows.size() == 1) {
+			aloneTime[*activeCows.begin()] += curTime - prevTime;
+		}
+
+		if (ev.isStartOfInterval) {
+			activeCows.insert(ev.cowId);
+		} else {
+			activeCows.erase(ev.cowId);
+		}
+
+		prevTime = curTime;
+	}
+
+	int minAloneTime = 1e9;
+	for (int i = 0; i < n; i++) {
+		minAloneTime = min(minAloneTime, aloneTime[i]);
+	}
+
+	cout << totalTime - minAloneTime << endl;
+}
+
