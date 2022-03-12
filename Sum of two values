@@ -1,6 +1,43 @@
 /* The problem statement can be found at the below link. 
 https://cses.fi/problemset/result/3493196/ */
-/* This is a partial solution. */
+/* There are two possible solutions to this problem first is with the help of two pointers and second is without the help of two pointers.*/
+
+/* first solution(with two pointers):- */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+     
+int main(){
+	int n,x;
+	cin >> n >> x;
+	vector<pair<int,int>> a(n);
+	for(int i=0;i<n;i++){
+		cin >> a[i].first;
+		a[i].second = i+1;
+	}
+	sort(a.begin(),a.end());
+	int left=0,right=n-1;
+	while(left<right){
+		if(a[left].first+a[right].first==x){
+			if(a[left].second>a[right].second){
+				cout << a[right].second << " " << a[left].second;
+			}
+			else{	
+				cout << a[left].second << " " << a[right].second;
+			}
+			return 0;
+		}
+		else if(a[left].first+a[right].first<x){
+			left++;
+		}
+		else{
+			right--;
+		}
+	}
+	cout << "IMPOSSIBLE";
+}
+
+/* second solution(without two pointers):- */
 #include<bits/stdc++.h>
 using namespace std;
 
