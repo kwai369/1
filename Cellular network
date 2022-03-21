@@ -1,0 +1,40 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/contest/702/problem/C */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	set<int> s;
+	int n,m;
+	cin >> n >> m;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	for(int i=0;i<m;i++){
+		int b;
+		cin >> b;
+		s.insert(b);
+	}
+	int ans=0;
+	for(int i=0;i<n;i++){
+		auto it = s.lower_bound(a[i]);
+		int dist=0;
+		if(it!=s.end()){
+			dist = *(it) - a[i];
+		}
+        else{
+            if(it!=s.begin()){
+                it--;
+                dist = a[i]- *(it);
+            }
+        } 
+		if(it!=s.begin()){
+			it--;
+			dist = min(dist,a[i] - *(it)); 
+		}
+		ans = max(ans,dist);
+	}
+	cout << ans;
+}
+

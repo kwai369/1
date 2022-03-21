@@ -1,0 +1,44 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/contest/1650/problem/A */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int solve(){
+	string s,s1;
+	cin >> s >> s1;
+	if(s.length()==1){
+		if(s==s1){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
+	else{
+		for(int i=0;i<s.length();i++){
+			if(s[i]==s1[0]){
+				if(!(i%2)){
+					return 1;
+				}
+			}
+		}
+		return 0;
+	}
+}
+
+int main(){
+	int t;
+	cin >> t;
+	while(t){
+		int ans = solve();
+		if(ans){
+			cout << "Yes" << "\n";
+		}
+		else{
+			cout << "No" << "\n";
+		}
+		t--;
+	}
+}
+

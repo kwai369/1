@@ -1,0 +1,38 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=834 */
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Entry {
+  int index;
+  int value;
+  bool operator<(const Entry& y){
+		if(value == y.value){
+			return index < y.index;
+		}
+		return value < y.value;
+	 }
+};
+
+Entry entries[100000];
+
+int main() {
+  freopen("sort.in","r",stdin);
+  freopen("sort.out","w",stdout);
+  int n;
+  cin >> n;
+
+  for (int i = 0; i < n; i++) {
+    entries[i].index = i;
+    cin >> entries[i].value;
+  }
+  
+  sort(entries,entries+n);
+  
+  int answer = 0;
+  for (int j = 0; j < n; j++) {
+    answer = max(answer, entries[j].index - j);
+  }
+  cout << answer+1;
+}
+

@@ -1,0 +1,38 @@
+/* The problem statement can be found at the below link.*/
+/* https://atcoder.jp/contests/abc243/tasks/abc243_d */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	ll x;
+	cin >> x;
+	string s;
+	cin >> s;
+	vector<char> t;
+	for(int i=0;i<n;i++){
+		int size = t.size();
+		if(s[i]=='U' && size>0 && (t[size-1]=='L' || t[size-1]=='R')){
+			t.pop_back();
+		}
+		else{
+			t.push_back(s[i]);
+		}
+	}
+	int size = t.size();
+	for(int i=0;i<size;i++){
+		if(t[i]=='U'){	
+			x = floor(x/2);
+		}
+		if(t[i]=='L'){
+			x = 2*x;			
+		}
+		if(t[i]=='R'){	
+			x = 2*x+1;
+		}
+	}
+	cout << x;
+}
+

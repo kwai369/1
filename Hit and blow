@@ -1,0 +1,37 @@
+/* The problem statement can be found at the below link.*/
+/* https://atcoder.jp/contests/abc243/tasks/abc243_b */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	int a[n],b[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	for(int i=0;i<n;i++){
+		cin >> b[i];
+	}
+	int ans1=0;
+	vector<int> logic(n,0);
+	for(int i=0;i<n;i++){	
+		if(a[i]==b[i]){
+			ans1++;
+			logic[i]=1;
+		}
+	}
+	unordered_map<int,int> mp;
+	for(int i=0;i<n;i++){
+		if(!logic[i]){	
+			mp[a[i]]++;
+		}
+	}
+	int ans2=0;
+	for(int i=0;i<n;i++){
+		ans2 += mp[b[i]];
+	}
+	cout << ans1 << "\n" << ans2;
+}
+

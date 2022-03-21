@@ -1,0 +1,32 @@
+/* The problem statement can be found at the below link. */
+/* https://codeforces.com/edu/course/2/lesson/6/1/practice/contest/283911/problem/B */
+#include <bits/stdc++.h>
+using namespace std;
+
+int close_l(int l,int r,function<bool(int)> f){
+	while(r > l+1){
+		int mid = l + (r-l)/2;
+		if(f(mid)){
+			l = mid;
+		}	
+		else{
+			r = mid;
+		}
+	}
+	return l+1;
+}
+
+int main(){
+	int n,k;
+	cin >> n >> k;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	for(int i=0;i<k;i++){	
+		int x;
+		cin >> x;
+		cout << close_l(-1,n,[&] (int ai) {return a[ai] <= x;}) << "\n";
+	}
+}
+

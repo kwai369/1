@@ -1,0 +1,14 @@
+/* The problem statement can be found at the below link. */
+/* https://atcoder.jp/contests/abc244/tasks/abc244_a */
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	string s;
+	cin >> s;
+	cout << s[n-1];
+}
+

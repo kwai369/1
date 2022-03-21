@@ -1,0 +1,35 @@
+/* The problem statement can be found at the below link.*/
+/* This is the code for the lower bound function in stl.*/
+#include <bits/stdc++.h>
+using namespace std;
+
+int solve(int a[],int n,int x){
+	int ans=-1,left=0,right=n-1;
+	while(left<=right){
+		int mid = left + floor((right-left)/2);
+		if(a[mid]>=x){
+			ans = mid;
+			right = mid-1;
+		}
+		else{
+			left = mid+1;
+		}
+	}
+	return ans;
+}
+
+int main(){
+	int n,k;
+	cin >> n >> k;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	for(int i=0;i<k;i++){
+		int x;
+		cin >> x;
+		int ans = solve(a,n,x);
+		cout << ans << "\n";
+	}
+}
+

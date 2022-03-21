@@ -1,0 +1,17 @@
+/* The problem statement can be found at the below link. */
+/* https://atcoder.jp/contests/abc238/tasks/abc238_a */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	if(n>=2 && n<=4){
+		cout << "No";
+	}
+	else{
+		cout << "Yes";
+	}
+}
+

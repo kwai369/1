@@ -1,0 +1,29 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/edu/course/2/lesson/9/2/practice/contest/307093/problem/B */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	ll x,cur=0;
+	cin >> x;
+	int a[n];
+	for(int i=0;i<n;i++){cin >> a[i];}
+	int left=0,ans=INT_MAX;
+	for(int right=0;right<n;right++){
+		cur += a[right];
+		while(cur-a[left] >= x){
+			cur -= a[left];
+			left++;
+		}
+		if(cur >= x){
+			ans = min(ans,right-left+1);
+		}
+	}
+	if(ans==INT_MAX){cout << -1;}	
+	else{cout << ans;}
+}
+
+

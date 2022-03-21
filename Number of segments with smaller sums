@@ -1,0 +1,23 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/edu/course/2/lesson/9/2/practice/contest/307093/problem/C */
+#include <bits/stdc++.h>
+using namespace std;
+     
+int main(){
+  int n;
+  long long x;
+  cin >> n >> x;
+  int a[n];
+  for(int i=0;i<n;i++){cin >> a[i];}
+  long long cur=0,left=0,ans=0;
+  for(int right=0;right<n;right++){
+  	cur += a[right];
+  	while(cur>x){
+  		cur-= a[left];
+  		left++;
+  	}
+   	ans += right-left+1;
+    }
+  cout << ans;
+}
+

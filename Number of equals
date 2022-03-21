@@ -1,0 +1,25 @@
+/* The problem statement can be found at the below link.*/
+/* https://codeforces.com/edu/course/2/lesson/9/1/practice/contest/307092/problem/C */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int n,m;
+	cin >> n >> m;
+	unordered_map<int,int> a;
+	for(int i=0;i<n;i++){
+		int x;
+		cin >> x;
+		a[x]++;
+	}
+	int b[m];
+	for(int i=0;i<m;i++){cin >> b[i];}
+	ll ans=0;
+	for(int i=0;i<m;i++){
+		ans += a[b[i]];
+	}
+	cout << ans;
+}
+
+

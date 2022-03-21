@@ -1,0 +1,28 @@
+/* The problem statement can be found at the below link.*/
+/* https://atcoder.jp/contests/abc243/tasks/abc243_a */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int x,f,m,t;
+	cin >> x >> f >> m >> t;
+	while(true){
+		x -= f;
+		if(x<0){
+			cout << "F";
+			return 0;
+		}
+		x -= m;
+		if(x<0){
+			cout << "M";
+			return 0;
+		}
+		x -= t;
+		if(x<0){
+			cout << "T";
+			return 0;
+		}
+	}
+}
+

@@ -1,0 +1,47 @@
+/* The problem statement can be found at the below link. */
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=666 */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	freopen("haybales.in","r",stdin);
+	freopen("haybales.out","w",stdout);
+	int n,k;
+	cin >> n >> k;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	sort(a,a+n);
+	for(int i=0;i<k;i++){
+		int l,r;
+		cin >> l >> r;
+		int left1=-1,right1=n;
+		while(right1>left1+1){
+			int mid1 = left1 + floor((right1-left1)/2);
+			if(a[mid1]<l){
+				left1 = mid1;
+			}
+			else{
+				right1 = mid1;
+			}
+		}
+		int left2=-1,right2=n;
+		while(right2>left2+1){
+			int mid2 = left2 + floor((right2-left2)/2);
+			if(a[mid2]<=r){
+				left2 = mid2;
+			}
+			else{
+				right2 = mid2;
+			}
+		}
+		if(right1 == n || left2 == -1){
+			cout << "0\n";
+		}
+		else{
+			cout << left2-right1+1 << "\n";
+		}
+	}
+}
+

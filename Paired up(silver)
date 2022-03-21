@@ -1,0 +1,83 @@
+/* The problem statement can be found at the below link.*/ 
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=738 */
+/* We have produced two solutions to this problem both of them have the same approach but the difference betwwen both of this solutions is that the first one is correct but inefficent and hence exceed the time
+limit in most of the testcases and the second one is correct and effecient.*/
+/* First solution(ineffecient)*/
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+     
+int main(){
+	freopen("pairup.in","r",stdin);
+	freopen("pairup.out","w",stdout);
+	int n;
+	cin >> n;
+	map<int,int> m;
+	int a[n];
+	for(int i=0;i<n;i++){
+		int x,y;
+		cin >> x >> y;
+		m[y] = x;
+		a[i] = y;
+	}
+	sort(a,a+n);
+	int left=0,right=n-1,maxi=0;
+	while(left<=right){
+		int cur = a[left]+a[right];
+		if(cur>maxi){
+			maxi = cur;
+		}
+		m[a[right]]--,m[a[left]]--;
+		if(m[a[right]]==0 && m[a[left]]==0){
+			right--,left++;
+		}
+		else if(m[a[right]]>0 && m[a[left]]==0){
+			left++;
+		}
+		else if(m[a[right]]==0 && m[a[left]]>0){
+			right--;
+		}
+	}
+	cout << maxi;
+}
+/* Second solution(effecient)*/
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+typedef pair<int,int> pii;
+
+int main(void){
+  freopen("pairup.in","r",stdin);
+  freopen("pairup.out","w",stdout);
+  int N;
+  vector<pii> V;
+  cin >> N;
+  for (int i=0; i<N; i++) {
+    int x, y;
+    cin >> x >> y;
+    V.push_back(pii(y,x));
+  }
+  sort(V.begin(), V.end());
+  int M = 0, i=0, j=N-1;
+  while (i <= j) {
+    int x = min(V[i].second, V[j].second);
+    if (i==j){ 
+		x /= 2;
+  	}
+	M = max(M, V[i].first + V[j].first);
+    V[i].second -= x;
+    V[j].second -= x;
+    if (V[i].second == 0){ 
+		i++;
+	}
+	if (V[j].second == 0) {
+		j--;
+	}
+  }
+  cout << M << "\n";
+  return 0;
+}
