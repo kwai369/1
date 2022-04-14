@@ -1,0 +1,26 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/result/3779313/ */
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	ll n;
+	cin >> n;
+	ll l=1,r=n*n,leq;
+	while(l<r){
+		ll mid = l + (r-l)/2;
+		leq = 0; 
+		for(int i=1;i<=n;i++){
+			leq += min(n,mid/i);
+		}
+		if(leq >= ((n*n)+1)/2){
+			r = mid;
+		}
+		else{
+			l = mid+1;
+		}
+	}
+	cout << r;
+}
+

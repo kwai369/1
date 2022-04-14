@@ -1,0 +1,98 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1192 */
+/* There are two implementations of this problem first one is a recurive one and second one is a non-recursive one.*/
+/* recursive implementation:-*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 1e3;
+bool visited[MAXN][MAXN];
+string grid[MAXN];
+int n,m;
+
+void floodfill(int r,int c){
+	if(r<0 || r>=n || c<0 || c>=m){
+		return;
+	}
+	if(visited[r][c]){
+		return;
+	}
+	if(grid[r][c]=='#'){
+		return;
+	}
+	visited[r][c] = true;
+	floodfill(r,c+1);
+	floodfill(r,c-1);
+	floodfill(r+1,c);
+	floodfill(r-1,c);
+}
+
+int main(){
+	cin >> n >> m;
+	for(int i=0;i<n;i++){
+		cin >> grid[i];
+	}
+	int rooms=0;
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			if(grid[i][j] == '.' && !visited[i][j]){
+				floodfill(i,j);
+				rooms++;
+			}
+		}
+	}
+	cout << rooms;
+}
+/* Non-recursive implementation.*/
+#include <iostream>
+#include <string>
+#include <stack>
+
+using namespace std;
+
+const int MAX_N = 2500;
+const int R_CHANGE[]{0, 1, 0, -1};
+const int C_CHANGE[]{1, 0, -1, 0};
+
+int row_num;
+int col_num;
+string building[MAX_N];
+bool visited[MAX_N][MAX_N];
+
+void floodfill(int r, int c) {
+	// Note: you can also use a queue and pop from the front for a BFS-based approach
+	stack<pair<int, int>> frontier;
+	frontier.push({r, c});
+	while(!frontier.empty()) {
+		r = frontier.top().first;
+		c = frontier.top().second;
+		frontier.pop();
+
+		if (r < 0 || r >= row_num || c < 0 || c >= col_num
+				|| building[r][c] == '#' || visited[r][c])
+			continue;
+
+		visited[r][c] = true;
+		for (int i = 0; i < 4; i++){
+			frontier.push({r + R_CHANGE[i], c + C_CHANGE[i]});
+		}
+	}
+}
+
+int main() {
+	cin >> row_num >> col_num;
+	for (int i = 0; i < row_num; i++) {
+		cin >> building[i];
+	}
+
+	int room_num = 0;
+	for (int i = 0; i < row_num; i++) {
+		for (int j = 0; j < col_num; j++) {
+			if (building[i][j] == '.' && !visited[i][j]) {
+				floodfill(i, j);
+				room_num++;
+			}
+		}
+	}
+	cout << room_num << endl;
+}

@@ -1,0 +1,27 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/result/3741451/ */
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std; 
+
+int main(){
+	int n,x;
+	cin >> x >> n;
+	priority_queue<int,vector<int>,greater<int>> pq;
+	for(int i=0;i<n;i++){
+		int a;
+		cin >> a;
+		pq.push(a);
+	} 
+	ll ans=0;
+	for(int i=1;i<n;i++){
+		int a = pq.top();
+		pq.pop();
+		int b = pq.top();
+		pq.pop();
+		pq.push(a+b);
+		ans += a+b;  
+	}
+	cout << ans << "\n";
+}
+

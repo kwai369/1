@@ -1,0 +1,50 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1085/ */
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int n,k;
+vector<int> vec;
+
+bool f(ll x){
+	int r=0,ans=0;
+	ll cur=0;
+	while(r<n){
+		while(r<n){
+			cur += vec[r++];
+			if(cur > x){
+				cur -= vec[--r];
+				break;
+			}
+		}
+		cur = 0;
+		ans++; 
+		if(ans>k){
+			return false;
+		}
+	}
+	return ans <= k;
+}
+
+int main(){
+	cin >> n >> k;
+	vec.resize(n);
+	ll hi=0;
+	for(int i=0;i<n;i++){
+		cin >> vec[i];
+		hi += vec[i];
+	}
+	ll lo=0;
+	while(lo+1 < hi){
+		ll mid = lo + (hi-lo)/2;
+		if(f(mid)){
+			hi = mid;
+		}
+		else{
+			lo = mid;
+		}
+	}
+	cout << hi;
+}
+

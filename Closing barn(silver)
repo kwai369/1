@@ -1,0 +1,58 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=644 */
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 3e3+10;
+vector<int> vec[MAXN];
+vector<bool> visited(MAXN),closed(MAXN);
+int n,m,nodes;
+
+void dfs(int node){
+	if(visited[node] || closed[node]){
+		return;
+	}
+	visited[node] = true;
+	nodes++;
+	for(int a : vec[node]){
+		if(!visited[a]){
+			dfs(a);
+		}
+	}
+}
+
+int main(){
+	freopen("closing.in","r",stdin);
+	freopen("closing.out","w",stdout);
+	cin >> n >> m;
+	for(int i=0;i<m;i++){
+		int a,b;
+		cin >> a >> b;
+		vec[a].push_back(b);
+		vec[b].push_back(a);
+	}
+	vector<int> order(n);
+	for(int i=0;i<n;i++){
+		cin >> order[i];
+	}
+	dfs(1);
+	if(nodes==n){
+		cout << "YES" << "\n";
+	}
+	else{
+		cout << "NO" << "\n";
+	}
+	for(int i=0;i<n-1;i++){
+		closed[order[i]] = true;
+		fill(visited.begin(),visited.end(),false);
+		nodes=0;
+		dfs(order[n-1]);
+		if(nodes==n-i-1){
+			cout << "YES" << "\n";
+		}
+		else{
+			cout << "NO" << "\n";
+		}
+	}
+}
+

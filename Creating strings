@@ -1,0 +1,56 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1622/ */
+/* There are two implementations of this problem they both are as follows the time complexity of both the implementations is same only. */
+/* First implementation:*/
+#include <bits/stdc++.h>
+using namespace std;
+
+string s;
+int char_count[26];
+vector<string> perms;
+
+void search(string ch){
+	if(ch.size() == s.size()){
+		perms.push_back(ch);
+		return;
+	}
+	else{
+		for(int i=0;i<26;i++){
+			if(char_count[i] > 0){
+				char_count[i]--;
+				search(ch + (char)('a' + i));
+				char_count[i]++;
+			}
+		}
+	}
+}
+
+int main(){
+	cin >> s;
+	for(char c : s){
+		char_count[c - 'a']++;
+	}
+	search("");
+	cout << perms.size() << "\n"; 
+	for(string x : perms){
+		cout << x << "\n";
+	}
+}
+/* Second implementation:*/
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+ 
+int main(){	
+	vector<string> ans;
+	string s;
+	cin >> s;
+	sort(s.begin(),s.end());
+	do{
+		ans.push_back(s);
+	}while(next_permutation(s.begin(),s.end()));
+	cout << ans.size();
+	for(int i=0;i<ans.size();i++){
+		cout << "\n" << ans[i];
+	}
+}

@@ -1,0 +1,49 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=858 */
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> a;
+int n,m,c;
+
+bool f(int k){
+	int b=0,cw=0,lcw=0;
+	while(cw < n){
+		if(lcw==cw){
+			b++;
+		}
+		if(a[cw]-a[lcw] > k){
+			lcw = cw;
+		}
+		else if(cw - lcw + 1 == c){
+			lcw = ++cw;
+		}
+		else{
+			cw++;
+		}
+	}
+	return b <= m;
+}
+
+int main(){
+	freopen("convention.in","r",stdin);
+	freopen("convention.out","w",stdout);
+	cin >> n >> m >> c;
+	a.resize(n);
+	for(int i=0;i<n;i++){
+		cin >> a[i];
+	}
+	sort(a.begin(),a.end());
+	int l = 0;
+	int r = a[n-1]- a[0];
+	while(l < r){
+		int mid = l + (r-l)/2;
+		if(f(mid)){
+			r = mid;
+		}
+		else{
+			l = mid + 1;
+		}
+	}
+	cout << l;
+}

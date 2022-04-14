@@ -1,0 +1,43 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1620/ */
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int n,t;
+vector<int> vec;
+
+bool f(ll x){
+	ll ans = 0; 
+	for(int i=0;i<n;i++){
+		ans += min(x/vec[i],(ll)1e9);
+	}
+	return ans >= t;
+}
+
+int main(){
+	cin >> n >> t;
+	vec.resize(n);
+	int maxi = 0;
+	for(int i=0;i<n;i++){
+		cin >> vec[i];
+		maxi = max(vec[i],maxi);
+	}
+	ll l = 0;
+	ll r = 1e18;
+	ll a = 1e18;
+	while(l<=r){
+		ll mid = l + (r-l)/2;
+		if(f(mid)){
+			if(mid < a){
+				a = mid;
+			}
+			r = mid - 1;
+		}
+		else{
+			l = mid + 1;
+		}
+	}  	
+	cout << a;
+}
+

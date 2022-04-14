@@ -1,0 +1,41 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=859 */
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main(){
+	freopen("convention2.in","r",stdin);
+	freopen("convention2.out","w",stdout);
+	int n;
+	cin >> n;
+	vector<pair<int,pair<int,int>>> c;
+	for(int i=0;i<n;i++){
+		int a,b;
+		cin >> a >> b;
+		c.push_back(make_pair(a,make_pair(i,b)));
+	}
+	sort(c.begin(),c.end());
+	set<pair<int,int>> queue;
+	ll ans = 0,cur_time;
+	int index=1;
+	cur_time = c[0].first + c[0].second.second;
+	while(index<n || queue.size() > 0){
+		while(index < n && c[index].first <= cur_time){
+			queue.insert(make_pair(c[index].second.first,index));
+			index++;
+		} 
+		if(queue.size()==0 && index<n){
+			cur_time = c[index].first + c[index].second.second;
+			index++;
+		}
+		else if(queue.size()>0){
+			auto ex = queue.begin();
+			ans = max(ans,cur_time - c[ex->second].first);
+			cur_time += c[ex->second].second.second;
+			queue.erase(ex);
+		}
+	}
+	cout << ans;	
+}
+

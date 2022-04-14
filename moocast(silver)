@@ -1,0 +1,46 @@
+/* THe problems statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=668 */
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 2e2;
+vector<int> a[N];
+vector<bool> b;
+
+int dfs(int node){
+	if(b[node]){
+		return 0;
+	}
+	b[node] = true;
+	int ret = 1;
+	for(int u : a[node]){
+		ret += dfs(u);
+	}
+	return ret;
+}
+
+int main(){
+	int n;
+	cin >> n;
+	vector<pair<int,int>> vec(n);
+	vector<int> vec1(n);
+	for(int i=0;i<n;i++){
+		cin >> vec[i].first >> vec[i].second >> vec1[i];
+	}
+	b.resize(n);
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			int sqr = ((vec[i].first - vec[j].first) * (vec[i].first - vec[j].first)) + ((vec[i].second - vec[j].second) * (vec[i].second - vec[j].second));
+			if(sqr <= vec1[i]*vec1[i]){
+				a[i].push_back(j);
+			}
+		}
+	}
+	int ret=1;
+	for(int i=0;i<n;i++){
+		fill(b.begin(),b.end(),false);
+		ret = max(ret,dfs(i));
+	}
+	cout << ret;
+}
+

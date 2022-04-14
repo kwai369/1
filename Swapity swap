@@ -1,0 +1,34 @@
+/* The problem statement can be found at the below link.*/
+/* http://www.usaco.org/index.php?page=viewproblem2&cpid=1013 */
+#include <bits/stdc++.h>
+using namespace std;
+
+int n,k;
+vector<int> vec,vec1;
+pair<int,int> a,b;
+
+vector<int> apply(vector<int> v){
+	reverse(begin(v)+a.first,begin(v)+a.second+1);
+	reverse(begin(v)+b.first,begin(v)+b.second+1);
+	return v;
+}
+
+int main(){
+	cin >> n >> k >> a.first >> a.second >> b.first >> b.second;
+	a.first--,a.second--,b.first--,b.second--;
+	vec.resize(n);
+	iota(begin(vec),end(vec),0);
+	vec1 = vec;
+	int period = 0;
+	do{
+		period++;
+		vec1 = apply(vec1);
+	}while(vec1 != vec);
+	for(k%=period;k;k--){
+		vec1 = apply(vec1);
+	}	
+	for(int i : vec1){
+		cout << i+1 << "\n";
+	}
+}
+

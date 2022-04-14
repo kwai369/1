@@ -1,0 +1,26 @@
+/* The problem statement cam be found at the below link. */
+/* https://cses.fi/problemset/task/1163/ */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int x,n;
+	cin >> x >> n;
+	set<int> p;
+	multiset<int> s;
+	p.insert(0),p.insert(x);
+	s.insert(x);
+	for(int i=0;i<n;i++){
+		int a;
+		cin >> a;
+		auto it = p.lower_bound(a);
+		int r = *it;
+		it--;
+		int l = *it;
+		s.erase(s.find(r-l));
+		p.insert(a);
+		s.insert(r-a),s.insert(a-l);
+		cout << *s.rbegin() << " ";
+	}
+}
+

@@ -1,0 +1,49 @@
+/* The problem statement can be found at the below link.*/
+/* https://cses.fi/problemset/task/1668/ */
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MN = 1e5+10;
+
+int N,M;
+bool b,visited[MN],group[MN];
+vector<int> adj[MN];
+
+void dfs(int n=1,bool g=0){
+	visited[n] = 1;
+	group[n] = g;
+	for(int u : adj[n]){
+		if(visited[u]){
+			if(group[u]==g){
+				b = 1;
+			}
+		}
+		else{
+			dfs(u,!g);
+		}
+	}
+}
+
+int main(){
+	cin >> N >> M;
+	for(int i=0;i<M;i++){
+		int u,v;
+		cin >> u >> v;
+		adj[u].push_back(v);
+		adj[v].push_back(u);
+	}
+	for(int i=1;!b && i<=N;i++){
+		if(!visited[i]){
+			dfs(i);
+		}
+	}
+	if(b){
+		cout << "IMPOSSIBLE";
+	}
+	else{
+		for(int i=1;i<=N;i++){
+			cout << group[i]+1 << " ";
+		}
+	}
+}
+

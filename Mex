@@ -1,0 +1,24 @@
+/* The problem statement can be found at the below link.*/
+/* https://atcoder.jp/contests/abc245/tasks/abc245_b */
+    #include <bits/stdc++.h>
+    #define ll long long
+    using namespace std;
+     
+    const int MAXN = 2e3+1;
+    int a[MAXN];
+     
+    int main(){
+    	int n;
+    	cin >> n;
+    	for(int i=0;i<n;i++){
+    		int x;
+    		cin >> x;
+    		a[x]++;
+    	}
+    	for(int i=0;i<=2000;i++){
+    		if(a[i]==0){
+    			cout << i;
+    			return 0;
+    		}
+    	}
+    }
